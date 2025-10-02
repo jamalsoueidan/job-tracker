@@ -1,0 +1,10 @@
+# Rename this file to .env.local
+# Deployment used by `npx convex dev`
+CONVEX_DEPLOYMENT=dev:xxx # team: jamal-soueidan, project: job-tracker-403be
+
+NEXT_PUBLIC_CONVEX_URL=https://xxx.convex.cloud
+
+# Same as NEXT_PUBLIC_CONVEX_URL but ends in .site
+NEXT_PUBLIC_CONVEX_SITE_URL=https://xxx.convex.site
+# Your local site URL
+SITE_URL=http://localhost:3000
