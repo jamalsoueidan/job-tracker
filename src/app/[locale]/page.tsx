@@ -9,6 +9,7 @@ import {
   pdf,
 } from "@react-pdf/renderer";
 import ChangeTranslation from "./components/ChangeTranslation";
+import PDFViewerClient from "./components/PDFViewer.client";
 import Translation from "./components/Translation";
 
 const styles = StyleSheet.create({
@@ -47,6 +48,7 @@ export default async function Home() {
     <>
       <Translation />
       <ChangeTranslation />
+      <PDFViewerClient base64={base64} />
     </>
   );
 }

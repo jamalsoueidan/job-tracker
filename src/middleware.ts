@@ -2,11 +2,7 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./routing";
 
-const middleware = createMiddleware(routing);
-
-export default function (req: any) {
-  return middleware(req);
-}
+export default createMiddleware(routing);
 
 export const config = {
   matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
