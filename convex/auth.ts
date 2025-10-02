@@ -1,9 +1,14 @@
 import { createClient, type GenericCtx } from "@convex-dev/better-auth";
 import { convex } from "@convex-dev/better-auth/plugins";
 import { betterAuth } from "better-auth";
+import {
+  customAction,
+  customMutation,
+  customQuery,
+} from "convex-helpers/server/customFunctions";
 import { components } from "./_generated/api";
 import { DataModel } from "./_generated/dataModel";
-import { query } from "./_generated/server";
+import { action, mutation, query } from "./_generated/server";
 
 const siteUrl = process.env.SITE_URL!;
 
@@ -48,16 +53,36 @@ export const getCurrentUser = query({
 
 // You can also just get the authenticated user id as you
 // normally would from ctx.auth.getUserIdentity
-export const getForCurrentUser = query({
+/*export const getForCurrentUser = query({
   args: {},
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
     if (identity === null) {
       throw new Error("Not authenticated");
     }
-    return await ctx.db
-      .query("messages")
-      .filter((q) => q.eq(q.field("author"), identity.email))
-      .collect();
+  },
+});*/
+
+export const userMutation = customMutation(mutation, {
+  args: {},
+  input: async (ctx, args) => {
+    const user = await authComponent.getAuthUser(ctx);
+    return { ctx: { user }, args };
+  },
+});
+
+export const userAction = customAction(action, {
+  args: {},
+  input: async (ctx, args) => {
+    const user = await authComponent.getAuthUser(ctx);
+    return { ctx: { user }, args };
+  },
+});
+
+export const userQuery = customQuery(query, {
+  args: {},
+  input: async (ctx, args) => {
+    const user = await authComponent.getAuthUser(ctx);
+    return { ctx: { user }, args };
   },
 });
